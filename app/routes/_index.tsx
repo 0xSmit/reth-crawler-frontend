@@ -88,7 +88,7 @@ function App() {
     return <div>Loading...</div>;
   }
   return (
-    <div className='min-h-screen bg-white p-4'>
+    <div className='min-h-screen bg-white p-4 main'>
       <header className='container mx-auto'>
         <Navigation />
         <Filters

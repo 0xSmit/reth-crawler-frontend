@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&family=Arimo:wght@400;500&family=Manrope:wght@400;600;800&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500&family=Arimo:wght@400;500&family=Manrope:wght@400;600;800&display=swap');
 
 @layer base {
   :root {
@@ -74,9 +74,33 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Manrope", sans-serif;
+    font-family: 'Manrope', sans-serif;
   }
   *:focus {
     outline-color: hsl(120, 100%, 44%);
   }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+  /* background-color: #f4f4f4; */
+  text-align: center;
+  padding: 20px;
+}
+
+/* Optional: Style the link within the footer */
+footer a {
+  color: #007bff;
+  text-decoration: none;
 }

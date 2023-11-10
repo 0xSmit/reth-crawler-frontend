@@ -40,11 +40,16 @@ function App() {
   if (!baseData) return <PageSkeleton />;
 
   return (
-    <div className='min-h-screen bg-white p-4'>
+    <div className='min-h-screen bg-white p-4 main'>
       <header className='container mx-auto'>
         <Navigation />
         <NodesTable data={JSON.parse(baseData) as NodeRecord[]} />
       </header>
+      <footer>
+        <p>
+          Made with ❤️ by <a href='https://github.com/Keep-Reth-Strange'>Keep-Reth-Strange</a>
+        </p>
+      </footer>
     </div>
   );
 }

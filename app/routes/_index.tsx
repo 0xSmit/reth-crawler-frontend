@@ -1,28 +1,28 @@
-import { Card, CardContent } from "@/components/ui/card";
-import type { LoaderFunction } from "@remix-run/node";
-import { useEffect, useRef, useState } from "react";
-import PieChart from "../components/PieChart";
-import Filters from "../components/Filters";
+import { Card, CardContent } from '@/components/ui/card';
+import type { LoaderFunction } from '@remix-run/node';
+import { useEffect, useRef, useState } from 'react';
+import PieChart from '../components/PieChart';
+import Filters from '../components/Filters';
 import {
   getBaseData,
   getClientVersionDistribution,
   getClientsData,
   getLanguageVersionDistribution,
   getOSDistribution,
-} from "../data/clients";
-import { useLoaderData } from "@remix-run/react";
-import { ClientsTable } from "~/components/ClientsTable";
-import { Navigation } from "~/components/Navigation";
+} from '../data/clients';
+import { useLoaderData } from '@remix-run/react';
+import { ClientsTable } from '~/components/ClientsTable';
+import { Navigation } from '~/components/Navigation';
 
 function ChartWrapper() {
   const chartdivRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const chartdiv = document.createElement("div");
-    chartdiv.id = "chartdiv";
-    chartdiv.style.width = "100%";
-    chartdiv.style.height = "500px";
-    chartdiv.style.paddingBottom = "100px";
+    const chartdiv = document.createElement('div');
+    chartdiv.id = 'chartdiv';
+    chartdiv.style.width = '100%';
+    chartdiv.style.height = '500px';
+    chartdiv.style.paddingBottom = '100px';
     chartdivRef.current?.appendChild(chartdiv);
 
     return () => {
@@ -41,8 +41,8 @@ function App() {
     chartData: Distribution[] | null;
   };
   const [isLoaded, setIsLoaded] = useState(false);
-  const [clientFilter, setClientFilter] = useState("");
-  const [secondaryFilter, setSecondaryFilter] = useState<SecondaryFilter>("clientVersion");
+  const [clientFilter, setClientFilter] = useState('');
+  const [secondaryFilter, setSecondaryFilter] = useState<SecondaryFilter>('clientVersion');
 
   const [chartData, setChartData] = useState<Distribution[] | null>(loaderChartData);
   const [clientsData, setClientsData] = useState<Client[] | null>(null);
@@ -50,6 +50,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getClientsData(baseData);
+      console.log(data);
       setClientsData(data);
       setChartData(data);
       setIsLoaded(true);
@@ -67,13 +68,13 @@ function App() {
 
       if (baseData && clientFilter) {
         switch (secondaryFilter) {
-          case "clientVersion":
+          case 'clientVersion':
             data = await getClientVersionDistribution(baseData, clientFilter);
             break;
-          case "os":
+          case 'os':
             data = await getOSDistribution(baseData, clientFilter);
             break;
-          case "languageVersion":
+          case 'languageVersion':
             data = await getLanguageVersionDistribution(baseData, clientFilter);
             break;
         }
@@ -87,8 +88,8 @@ function App() {
     return <div>Loading...</div>;
   }
   return (
-    <div className="min-h-screen bg-white p-4">
-      <header className="container mx-auto">
+    <div className='min-h-screen bg-white p-4'>
+      <header className='container mx-auto'>
         <Navigation />
         <Filters
           clientFilter={clientFilter}
@@ -96,17 +97,18 @@ function App() {
           setClientFilter={setClientFilter}
           setSecondaryFilter={setSecondaryFilter}
         />
-        <Card className="p-4 mt-8">
+        <Card className='p-4 mt-8'>
           <CardContent>
             <ChartWrapper />
           </CardContent>
         </Card>
+
         <PieChart
           key={`client-chart-${secondaryFilter}-${clientFilter}`} // Add clientFilter to the key
           data={chartData}
-          id="chartdiv"
+          id='chartdiv'
           onClick={!clientFilter ? handleClientChartClick : null}
-          categoryField={!clientFilter ? "client" : secondaryFilter}
+          categoryField={!clientFilter ? 'client' : secondaryFilter}
         />
         <ClientsTable data={clientsData as ClientDistribution[]} />
       </header>

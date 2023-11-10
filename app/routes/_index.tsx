@@ -112,6 +112,11 @@ function App() {
         />
         <ClientsTable data={clientsData as ClientDistribution[]} />
       </header>
+      <footer>
+        <p>
+          Made with ❤️ by <a href='https://github.com/Keep-Reth-Strange'>Keep-Reth-Strange</a>
+        </p>
+      </footer>
     </div>
   );
 }

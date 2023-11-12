@@ -43,7 +43,7 @@ export function ClientsTable<TData extends ClientDistribution>({ data }: DataTab
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id} className="font-medium">
+                  <TableHead key={header.id} className="font-medium text-lg">
                     {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 );
